@@ -1,0 +1,31 @@
+#!/bin/bash
+
+CUR_DIR=$(pwd)
+
+rm -rf $HOME/.dwm
+cp -r /var/abs/community/dwm $HOME/.dwm
+cd $HOME/.dwm
+makepkg -i
+
+cd $CUR_DIR
+cp PKGBUILD PKGBUILD.original $HOME/.dwm/
+cp dwm-statusbar $HOME/.dwm/
+cp 0* config.h bstack.c gaplessgrid.c push.c $HOME/.dwm/src/
+
+if [ ! -d "$HOME/.fonts" ]; then
+  mkdir $HOME/.fonts
+fi
+
+if [ ! -f "$HOME/.fonts/terminus2.bdf" ] || [ ! -f "$HOME/.fonts/xbmicons.pcf" ]; then
+  cp terminus2.bdf xbmicons.pcf $HOME/.fonts/
+  mkfontdir $HOME/.fonts
+  mkfontscale $HOME/.fonts
+  xset +fp $HOME/.fonts
+  xset fp rehash
+  fc-cache
+  fc-cache -fv
+fi
+
+cd $HOME/.dwm
+makepkg -efi --skipinteg
+mv PKGBUILD.original PKGBUILD

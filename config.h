@@ -72,20 +72,19 @@ static const Layout layouts[] = {
 /* commands */
 static const char  *dmenucmd[]     = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 static const char *termcmd[]       = { "urxvt", NULL };
-static const char *volupcmd[]      = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
-static const char *voldncmd[]      = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
-static const char *volmutecmd[]    = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char scratchpadname[] = { "scratchpad" };
+static const char *lightupcmd[]    = { "xbacklight", "+30%", NULL };
+static const char *lightdncmd[]    = { "xbacklight", "-30%", NULL };
+static const char *lock[]          = { "slock", NULL };
 
 #include "push.c"
 static Key keys[] = {
   /* modifier               key               function        argument               diff */
   { MODKEY,                 XK_p,             spawn,          {.v = dmenucmd } },
   { MODKEY|ShiftMask,       XK_Return,        spawn,          {.v = termcmd } },
-
-  { MODKEY,                 XK_F12,           spawn,          {.v = volupcmd } },    //
-  { MODKEY,                 XK_F11,           spawn,          {.v = voldncmd } },    //
-  { MODKEY,                 XK_F10,           spawn,          {.v = volmutecmd } },  //
-  
+  { MODKEY,                 XK_F5,            spawn,          {.v = lightupcmd } },  //
+  { MODKEY,                 XK_F4,            spawn,          {.v = lightdncmd } },  //
+  { MODKEY|ShiftMask,       XK_l,             spawn,          {.v = lock } },        //
   { MODKEY|ControlMask,     XK_b,             togglebar,      {0} },                 //
   { MODKEY,                 XK_j,             focusstack,     {.i = +1 } },
   { MODKEY,                 XK_k,             focusstack,     {.i = -1 } },

@@ -11,8 +11,4 @@ You can use a script in this folder to install/recompile dwm
 
 ## Status bar
 
-You can find my statusbar script in this repo.
-
-## License
-
-All repository of me is under the GPLv3
+You can find my statusbar script in this repo
